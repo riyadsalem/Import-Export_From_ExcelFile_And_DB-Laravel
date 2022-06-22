@@ -20,7 +20,7 @@ class ProductSeeder extends Seeder
     {
         $faker = Factory::create();
 
-        for ($i = 0; $i < 100000; $i++) {
+        for ($i = 0; $i < 10000; $i++) {
 
             $products[] = [
                 'name'          => $faker->sentence(3),
@@ -34,7 +34,7 @@ class ProductSeeder extends Seeder
 
         } // End for
 
-        $chunks = array_chunk($products, 1000);
+        $chunks = array_chunk($products, 350);
         foreach ($chunks as $chunk) {
             Product::insert($chunk);
         } // End foreach
