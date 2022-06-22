@@ -4,24 +4,23 @@ namespace App\Exports;
 
 use App\Models\Product;
 use Maatwebsite\Excel\Concerns\FromCollection;
+use Maatwebsite\Excel\Concerns\WithHeadings;
+use Maatwebsite\Excel\Concerns\WithMapping;
 
-class ProductsExport implements FromCollection, WithMapping
+class ProductsExport implements FromCollection, WithMapping, WithHeadings
 {
     /**
     * @return \Illuminate\Support\Collection
     */
     public function collection()
     {
-        // I can make filter from Controller and send hear 
-        $products = Product::orderBy('id', 'desc')->get(); // All Data in Products
+        $products = Product::take(100)->orderBy('id', 'desc')->get();
         return $products;
     } // End method
 
-
-
-    public function map($products): array // filter data inside EXCEL file
+    public function map($products): array
     {
-        return [
+        return [ // data form $proucts
             $products->name,
             $products->type_code,
             $products->description,
@@ -29,10 +28,9 @@ class ProductsExport implements FromCollection, WithMapping
             $products->price,
             $products->created_at->toDateString(),
         ];
-    } // End Method
+    } // End mehtod
 
-
-    public function headings(): array // <th> inside excel file 
+    public function headings(): array // header for file 
     {
         return [
             'Name',
@@ -40,8 +38,8 @@ class ProductsExport implements FromCollection, WithMapping
             'Description',
             'Quantity',
             'Price',
-            'Date'
+            'Data',
         ];
-    } // End Method
+    } // End method
 
-}
+} // End class

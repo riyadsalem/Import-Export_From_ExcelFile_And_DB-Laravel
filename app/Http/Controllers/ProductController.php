@@ -15,13 +15,14 @@ class ProductController extends Controller
     public function index()
     {
         $products = Product::paginate(10);
-        return view('products.index',compact('products'));
-    } // End Method
+        return view('products.index', compact('products'));
+    } // End method
 
-    public function export(Request $request){
-        
-        return Excel::download(new UsersExport, 'users.xlsx');
+    public function export(Request $request)
+    {
+         //  return Excel::download(new ProductsExport(), 'products-'.date('Y-m-d').'.pdf', \Maatwebsite\Excel\Excel::MPDF); 
+         return Excel::download(new ProductsExport(), 'products-'.date('Y-m-d').'.xlsx', \Maatwebsite\Excel\Excel::XLSX); // 
+    } // end Method
 
-    } // End Method
-    
+
 } // End Class
