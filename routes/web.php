@@ -22,9 +22,12 @@ Route::get('/', function () {
 
 
 Route::get('/', [ProductController::class , 'index'] )->name('show.products');
+Route::post('products/export', [ProductController::class , 'export'] )->name('products.export');
+
 
 
 
 Auth::routes();
-Route::get('/home', [HomeController::class, 'index'])->name('home');
+
+// Route::get('/home', [HomeController::class, 'index'])->name('home');
 

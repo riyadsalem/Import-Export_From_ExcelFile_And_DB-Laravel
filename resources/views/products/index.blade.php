@@ -4,8 +4,15 @@
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-12">
-            <div class="card">
-                <div class="card-header">{{ __('Products') }}</div>
+                  <div class="card">
+                    <div class="card-header d-flex" style=" display: flex; justify-content: space-between;">
+                        {{ __('Products') }}
+                        <form action="{{ route('products.export') }}" method="post" class="ml-auto" >
+                            @csrf
+                            <button type="submit" class="btn btn-sm btn-primary">Export</button>
+                        </form>
+
+                  </div>
 
                 <div class="card-body">
                     @if (session('message'))
